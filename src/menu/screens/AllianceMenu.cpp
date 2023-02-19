@@ -13,13 +13,11 @@ AllianceMenu::AllianceMenu()
     lv_style_copy(&button_matrix_background_style, &lv_style_transp);
     lv_style_copy(&button_released_style, &lv_style_btn_rel);
     lv_style_copy(&button_pressed_style, &lv_style_btn_pr);
-    lv_style_copy(&button_highlighted_style, &lv_style_btn_rel);
+    lv_style_copy(&button_highlighted_style, &lv_style_transp);
     button_released_style.text.color = LV_COLOR_WHITE;
     button_pressed_style.text.color = LV_COLOR_WHITE;
-    button_highlighted_style.body.opa = LV_OPA_TRANSP;
     button_highlighted_style.body.border.color = LV_COLOR_RED;
     button_highlighted_style.body.border.width = 5;
-    button_highlighted_style.text.color = LV_COLOR_WHITE;
 
     background = nullptr;
     button_matrix = nullptr;
