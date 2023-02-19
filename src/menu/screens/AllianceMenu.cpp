@@ -117,6 +117,7 @@ void AllianceMenu::createHighlightButton()
     highlight_button = lv_btn_create(lv_scr_act(), NULL);
     lv_btn_set_state(highlight_button, LV_BTN_STATE_INA);
     lv_btn_set_style(highlight_button, LV_BTN_STYLE_INA, &button_highlighted_style);
+    lv_obj_set_click(highlight_button, false);
 
     // Place the highlight button
     if (button_matrix != nullptr)
