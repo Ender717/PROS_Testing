@@ -4,8 +4,8 @@
 
 // Included headers
 #include "main.h"
-#include "MenuTypes.h"
-#include "MenuData.h"
+#include "menu/MenuTypes.h"
+#include "menu/MenuData.h"
 
 /**
  * This class manages a screen in the menu

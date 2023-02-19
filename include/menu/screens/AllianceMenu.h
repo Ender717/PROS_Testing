@@ -14,9 +14,13 @@ private:
     static constexpr char BACKGROUND_FILE[50] = "S:/usd/images/alliance_menu.bin";
 
     /**
-     * The number of buttons to display on each line
+     * The configuration info for the button matrix
      */
     static constexpr int BUTTONS_PER_LINE = 2;
+    static constexpr int BUTTON_MATRIX_WIDTH = 460;
+    static constexpr int BUTTON_MATRIX_HEIGHT = 180;
+    static constexpr int BUTTON_MATRIX_X = 10;
+    static constexpr int BUTTON_MATRIX_Y = 50;
 
     /**
      * The object styles

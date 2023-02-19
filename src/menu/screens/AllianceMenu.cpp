@@ -1,7 +1,5 @@
 // Included headers
 #include "menu/screens/AllianceMenu.h"
-#include "MenuTypes.h"
-#include "display/lv_objx/lv_btn.h"
 
 lv_style_t AllianceMenu::button_matrix_background_style;
 lv_style_t AllianceMenu::button_released_style;
@@ -99,8 +97,8 @@ void AllianceMenu::createButtonMatrix()
     lv_btnm_set_style(button_matrix, LV_BTNM_STYLE_BTN_PR, &button_pressed_style);
     lv_btnm_set_map(button_matrix, button_map);
     lv_btnm_set_action(button_matrix, buttonEvent);
-    lv_obj_set_size(button_matrix, 460, 180);
-    lv_obj_align(button_matrix, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 50);
+    lv_obj_set_size(button_matrix, BUTTON_MATRIX_WIDTH, BUTTON_MATRIX_HEIGHT);
+    lv_obj_align(button_matrix, NULL, LV_ALIGN_IN_TOP_LEFT, BUTTON_MATRIX_X, BUTTON_MATRIX_Y);
 }
 
 void AllianceMenu::createHighlightButton()
@@ -120,8 +118,12 @@ void AllianceMenu::createHighlightButton()
     // Place the highlight button
     if (button_matrix != nullptr)
     {
-        // TODO Calculate correct size and position
-        lv_obj_set_size(highlight_button, 100, 100);
-        lv_obj_align(highlight_button, NULL, LV_ALIGN_IN_TOP_LEFT, 20, 20);
+        int width = (BUTTON_MATRIX_WIDTH - ((BUTTONS_PER_LINE - 1) * button_matrix->style_p->body.padding.inner)) / BUTTONS_PER_LINE;
+        int height = (BUTTON_MATRIX_HEIGHT - (((MenuTypes::ALLIANCE_COUNT / BUTTONS_PER_LINE) - 1) * button_matrix->style_p->body.padding.inner)) /
+            (MenuTypes::ALLIANCE_COUNT / BUTTONS_PER_LINE);
+        int x = 0;
+        int y = 0;
+        lv_obj_set_size(highlight_button, width, height);
+        lv_obj_align(highlight_button, button_matrix, LV_ALIGN_IN_TOP_LEFT, x, y);
     }
 }
