@@ -1,7 +1,5 @@
 // Included headers
-#include "menu/MainMenu.h"
-#include "display/lv_misc/lv_color.h"
-#include "pros/misc.h"
+#include "menu/screens/MainMenu.h"
 
 lv_style_t MainMenu::button_released_style;
 lv_style_t MainMenu::button_pressed_style;
@@ -461,10 +459,8 @@ void MainMenu::close()
     pros::screen::erase();
 }
 
-void MainMenu::update()
+void MainMenu::update(pros::Controller& controller)
 {
-    pros::Controller controller = pros::E_CONTROLLER_MASTER;
-
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT))
         moveHighlightLeft();
     else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT))

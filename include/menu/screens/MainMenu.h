@@ -23,7 +23,7 @@ private:
     /**
      * The name of the file containing the background for the main menu
      */
-    static constexpr char BACKGROUND_FILE[30] = "S:/usd/images/main_menu.bin";
+    static constexpr char BACKGROUND_FILE[50] = "S:/usd/images/main_menu.bin";
 
     /**
      * The button styles
@@ -55,6 +55,7 @@ private:
 
     /**
      * The events for the buttons
+     * @param button The button which was pressed
      */
     static lv_res_t startButtonEvent(lv_obj_t* button);
     static lv_res_t allianceButtonEvent(lv_obj_t* button);
@@ -73,7 +74,7 @@ private:
     void createProfileButton();
 
     /**
-     * Methods to move the highlighted button
+     * Methods to interact with the highlighted button
      */
     void moveHighlightLeft();
     void moveHighlightRight();
@@ -104,8 +105,9 @@ public:
 
     /**
      * Updates the main menu
+     * @param controller The input controller
      */
-    virtual void update();
+    virtual void update(pros::Controller& controller);
 };
 
 #endif

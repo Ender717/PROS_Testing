@@ -31,8 +31,9 @@ public:
 
     /**
      * Updates the menu screen
+     * @param controller The input controller
      */
-    virtual void update() = 0;
+    virtual void update(pros::Controller& controller) = 0;
 };
 
 #endif

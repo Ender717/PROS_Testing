@@ -14,11 +14,12 @@ void initialize()
     MenuData::readData();
     if (!pros::competition::is_connected() || pros::competition::is_disabled())
     {
+        pros::Controller controller = pros::E_CONTROLLER_MASTER;
         Menu menu;
         menu.open();
         while(menu.isRunning())
         {
-            menu.update();
+            menu.update(controller);
             pros::delay(30);
         }
         menu.close();

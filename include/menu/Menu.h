@@ -5,8 +5,7 @@
 // Included headers
 #include "MenuTypes.h"
 #include "MenuData.h"
-#include "MenuScreen.h"
-#include "MainMenu.h"
+#include "screens/Screens.h"
 
 /**
  * This class manages the menu system
@@ -54,7 +53,7 @@ public:
     /**
      * Updates the menu
      */
-    void update();
+    void update(pros::Controller& controller);
 
     /**
      * Checks if the menu is still running

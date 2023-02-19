@@ -47,12 +47,12 @@ void Menu::close()
     running = false;
 }
 
-void Menu::update()
+void Menu::update(pros::Controller& controller)
 {
     // Check for a submenu update
     if (currentMenu == MenuData::getSubmenu())
     {
-        currentScreen->update();
+        currentScreen->update(controller);
         return;
     }
 
