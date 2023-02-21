@@ -59,6 +59,7 @@ private:
     /**
      * Methods to interact with the highlighted button
      */
+    void placeHighlight();
     void moveHighlightLeft();
     void moveHighlightRight();
     void moveHighlightUp();
@@ -90,7 +91,7 @@ public:
      * Updates the menu screen
      * @param controller The input controller
      */
-    virtual void update(pros::Controller controller);
+    virtual void update(pros::Controller& controller);
 };
 
 #endif

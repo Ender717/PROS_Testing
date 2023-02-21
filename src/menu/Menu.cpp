@@ -71,7 +71,7 @@ void Menu::update(pros::Controller& controller)
     switch(currentMenu)
     {
         case MenuTypes::Submenu::ALLIANCE:
-            // Create alliance menu screen
+            currentScreen = new AllianceMenu;
             break;
         case MenuTypes::Submenu::AUTON:
             // Create auton menu screen
