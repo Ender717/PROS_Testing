@@ -1,17 +1,17 @@
 // Inclusion guard
-#ifndef ALLIANCE_MENU_H
-#define ALLIANCE_MENU_H
+#ifndef AUTON_MENU_H
+#define AUTON_MENU_H
 
 // Included headers
 #include "OptionScreen.h"
 
-class AllianceMenu : public OptionScreen
+class AutonMenu : public OptionScreen
 {
 private:
     /**
-     * The name of the file containing the header for the alliance menu
+     * The name of the file containing the header for the auton menu
      */
-    static constexpr char HEADER_FILE[50] = "S:/usd/images/alliance_header.bin";
+    static constexpr char HEADER_FILE[50] = "S:/usd/images/auton_header.bin";
 
     /**
      * The configuration info for the button matrix
@@ -34,7 +34,7 @@ public:
     /**
      * Default constructor
      */
-    AllianceMenu();
+    AutonMenu();
 
     /**
      * Updates the menu screen

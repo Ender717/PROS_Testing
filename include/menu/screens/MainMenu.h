@@ -21,9 +21,9 @@ private:
     };
 
     /**
-     * The name of the file containing the background for the main menu
+     * The name of the file containing the logo for the main menu
      */
-    static constexpr char BACKGROUND_FILE[50] = "S:/usd/images/main_menu.bin";
+    static constexpr char LOGO_FILE[50] = "S:/usd/images/main_logo.bin";
 
     /**
      * The button styles
@@ -36,7 +36,7 @@ private:
     /**
      * The lvgl objects used to draw the main menu screen
      */
-    lv_obj_t* background;
+    lv_obj_t* logo;
     lv_obj_t* start_button;
     lv_obj_t* start_button_label;
     lv_obj_t* alliance_button;
@@ -66,7 +66,7 @@ private:
     /**
      * Methods to create each component of the menu screen
      */
-    void createBackground();
+    void createLogo();
     void createStartButton();
     void createAllianceButton();
     void createAutonButton();
@@ -92,16 +92,6 @@ public:
      * Destructor
      */
     virtual ~MainMenu();
-
-    /**
-     * Opens the main menu
-     */
-    virtual void open();
-
-    /**
-     * Closes the main menu
-     */
-    virtual void close();
 
     /**
      * Updates the main menu

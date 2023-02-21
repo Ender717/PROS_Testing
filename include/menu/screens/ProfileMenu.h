@@ -1,22 +1,22 @@
 // Inclusion guard
-#ifndef ALLIANCE_MENU_H
-#define ALLIANCE_MENU_H
+#ifndef PROFILE_MENU_H
+#define PROFILE_MENU_H
 
 // Included headers
 #include "OptionScreen.h"
 
-class AllianceMenu : public OptionScreen
+class ProfileMenu : public OptionScreen
 {
 private:
     /**
-     * The name of the file containing the header for the alliance menu
+     * The name of the file containing the header for the profile menu
      */
-    static constexpr char HEADER_FILE[50] = "S:/usd/images/alliance_header.bin";
+    static constexpr char HEADER_FILE[50] = "S:/usd/images/profile_header.bin";
 
     /**
      * The configuration info for the button matrix
      */
-    static constexpr int BUTTONS_PER_LINE = 2;
+    static constexpr int BUTTONS_PER_LINE = 3;
 
     /**
      * The event for the buttons
@@ -34,7 +34,7 @@ public:
     /**
      * Default constructor
      */
-    AllianceMenu();
+    ProfileMenu();
 
     /**
      * Updates the menu screen

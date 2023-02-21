@@ -23,12 +23,12 @@ namespace MenuTypes
     {
         BLUE_LEFT,
         BLUE_RIGHT,
-        RED_LEFT,
-        RED_RIGHT,
+        ORANGE_LEFT,
+        ORANGE_RIGHT,
         SKILLS_LEFT,
         SKILLS_RIGHT
     };
-    static const char* AUTON_STR[] = { "BLUE_LEFT", "BLUE_RIGHT", "RED_LEFT", "RED_RIGHT", "SKILLS_LEFT", "SKILLS_RIGHT" };
+    static const char* AUTON_STR[] = { "BLUE_LEFT", "BLUE_RIGHT", "ORANGE_LEFT", "ORANGE_RIGHT", "SKILLS_LEFT", "SKILLS_RIGHT" };
     static const int AUTON_COUNT = 6;
 
     /**

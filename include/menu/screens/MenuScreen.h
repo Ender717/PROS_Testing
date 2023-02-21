@@ -20,16 +20,6 @@ public:
     virtual ~MenuScreen() = default;
 
     /**
-     * Opens the menu screen
-     */
-    virtual void open() = 0;
-
-    /**
-     * Closes the menu screen
-     */
-    virtual void close() = 0;
-
-    /**
      * Updates the menu screen
      * @param controller The input controller
      */

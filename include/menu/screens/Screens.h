@@ -1,4 +1,6 @@
 // Macro file to include all menu screens
-#include "MenuScreen.h"
 #include "AllianceMenu.h"
+#include "AutonMenu.h"
+#include "ConfigMenu.h"
+#include "ProfileMenu.h"
 #include "MainMenu.h"

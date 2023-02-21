@@ -1,5 +1,7 @@
 // Included headers
 #include "menu/screens/MainMenu.h"
+#include "display/lv_objx/lv_btn.h"
+#include "menu/MenuTypes.h"
 
 lv_style_t MainMenu::button_released_style;
 lv_style_t MainMenu::button_pressed_style;
@@ -16,7 +18,24 @@ MainMenu::MainMenu()
     button_highlighted_style.body.border.width = 5;
     button_label_style.text.color = LV_COLOR_WHITE;
 
-    background = nullptr;
+    highlighted = Button::START;
+    createLogo();
+    createStartButton();
+    createAllianceButton();
+    createAutonButton();
+    createConfigButton();
+    createProfileButton();
+}
+
+MainMenu::~MainMenu()
+{
+    lv_obj_del(logo);
+    lv_obj_del(start_button);
+    lv_obj_del(alliance_button);
+    lv_obj_del(auton_button);
+    lv_obj_del(config_button);
+    lv_obj_del(profile_button);
+    logo = nullptr;
     start_button = nullptr;
     start_button_label = nullptr;
     alliance_button = nullptr;
@@ -27,77 +46,6 @@ MainMenu::MainMenu()
     config_button_label = nullptr;
     profile_button = nullptr;
     profile_button_label = nullptr;
-
-    highlighted = Button::START;
-}
-
-MainMenu::~MainMenu()
-{
-    if (background != nullptr)
-    {
-        delete background;
-        background = nullptr;
-    }
-
-    if (start_button != nullptr)
-    {
-        delete start_button;
-        start_button = nullptr;
-    }
-
-    if (start_button_label != nullptr)
-    {
-        delete start_button_label;
-        start_button_label = nullptr;
-    }
-
-    if (alliance_button != nullptr)
-    {
-        delete alliance_button;
-        alliance_button = nullptr;
-    }
-
-    if (alliance_button_label != nullptr)
-    {
-        delete alliance_button_label;
-        alliance_button_label = nullptr;
-    }
-
-    if (auton_button != nullptr)
-    {
-        delete auton_button;
-        auton_button = nullptr;
-    }
-
-    if (auton_button_label != nullptr)
-    {
-        delete auton_button_label;
-        auton_button_label = nullptr;
-    }
-
-    if (config_button != nullptr)
-    {
-        delete config_button;
-        config_button = nullptr;
-    }
-
-    if (config_button_label != nullptr)
-    {
-        delete config_button_label;
-        config_button_label = nullptr;
-    }
-
-    if (profile_button != nullptr)
-    {
-        delete profile_button;
-        profile_button = nullptr;
-    }
-
-    if (profile_button_label != nullptr)
-    {
-        delete profile_button_label;
-        profile_button_label = nullptr;
-    }
 }
 
 lv_res_t MainMenu::startButtonEvent(lv_obj_t* button)
@@ -130,33 +78,15 @@ lv_res_t MainMenu::profileButtonEvent(lv_obj_t* button)
     return LV_RES_OK;
 }
 
-void MainMenu::createBackground()
+void MainMenu::createLogo()
 {
-    if (background != nullptr)
-    {
-        delete background;
-        background = nullptr;
-    }
-
-    background = lv_img_create(lv_scr_act(), NULL);
-    lv_img_set_src(background, BACKGROUND_FILE);
-    lv_obj_set_pos(background, 0, 0);
+    logo = lv_img_create(lv_scr_act(), NULL);
+    lv_img_set_src(logo, LOGO_FILE);
+    lv_obj_set_pos(logo, 260, 10);
 }
 
 void MainMenu::createStartButton()
 {
-    if (start_button != nullptr)
-    {
-        delete start_button;
-        start_button = nullptr;
-    }
-
-    if (start_button_label != nullptr)
-    {
-        delete start_button_label;
-        start_button_label = nullptr;
-    }
-
     // Create the start button
     start_button = lv_btn_create(lv_scr_act(), NULL);
     lv_btn_set_action(start_button, LV_BTN_ACTION_CLICK, startButtonEvent);
@@ -173,18 +103,6 @@ void MainMenu::createStartButton()
 
 void MainMenu::createAllianceButton()
 {
-    if (alliance_button != nullptr)
-    {
-        delete alliance_button;
-        alliance_button = nullptr;
-    }
-
-    if (alliance_button_label != nullptr)
-    {
-        delete alliance_button_label;
-        alliance_button_label = nullptr;
-    }
-
     // Create the alliance button
     alliance_button = lv_btn_create(lv_scr_act(), NULL);
     lv_btn_set_action(alliance_button, LV_BTN_ACTION_CLICK, allianceButtonEvent);
@@ -205,18 +123,6 @@ void MainMenu::createAllianceButton()
 
 void MainMenu::createAutonButton()
 {
-    if (auton_button != nullptr)
-    {
-        delete auton_button;
-        auton_button = nullptr;
-    }
-
-    if (auton_button_label != nullptr)
-    {
-        delete auton_button_label;
-        auton_button_label = nullptr;
-    }
-
     // Create the auton button
     auton_button = lv_btn_create(lv_scr_act(), NULL);
     lv_btn_set_action(auton_button, LV_BTN_ACTION_CLICK, autonButtonEvent);
@@ -237,18 +143,6 @@ void MainMenu::createAutonButton()
 
 void MainMenu::createConfigButton()
 {
-    if (config_button != nullptr)
-    {
-        delete config_button;
-        config_button = nullptr;
-    }
-
-    if (config_button_label != nullptr)
-    {
-        delete config_button_label;
-        config_button_label = nullptr;
-    }
-
     // Create the config button
     config_button = lv_btn_create(lv_scr_act(), NULL);
     lv_btn_set_action(config_button, LV_BTN_ACTION_CLICK, configButtonEvent);
@@ -269,18 +163,6 @@ void MainMenu::createConfigButton()
 
 void MainMenu::createProfileButton()
 {
-    if (profile_button != nullptr)
-    {
-        delete profile_button;
-        profile_button = nullptr;
-    }
-
-    if (profile_button_label != nullptr)
-    {
-        delete profile_button_label;
-        profile_button_label = nullptr;
-    }
-
     // Create the profile button
     profile_button = lv_btn_create(lv_scr_act(), NULL);
     lv_btn_set_action(profile_button, LV_BTN_ACTION_CLICK, profileButtonEvent);
@@ -426,37 +308,26 @@ void MainMenu::pressButton()
     switch (highlighted)
     {
         case Button::START:
+            lv_btn_set_state(start_button, LV_BTN_STATE_PR);
             startButtonEvent(start_button);
             break;
         case Button::ALLIANCE:
+            lv_btn_set_state(alliance_button, LV_BTN_STATE_PR);
             allianceButtonEvent(alliance_button);
             break;
         case Button::AUTON:
+            lv_btn_set_state(auton_button, LV_BTN_STATE_PR);
             autonButtonEvent(auton_button);
             break;
         case Button::CONFIG:
+            lv_btn_set_state(config_button, LV_BTN_STATE_PR);
             configButtonEvent(config_button);
             break;
         case Button::PROFILE:
+            lv_btn_set_state(profile_button, LV_BTN_STATE_PR);
             profileButtonEvent(profile_button);
             break;
     }
-}
-
-void MainMenu::open()
-{
-    createBackground();
-    createStartButton();
-    createAllianceButton();
-    createAutonButton();
-    createConfigButton();
-    createProfileButton();
-}
-
-void MainMenu::close()
-{
-    lv_obj_clean(lv_scr_act());
-    pros::screen::erase();
 }
 
 void MainMenu::update(pros::Controller& controller)

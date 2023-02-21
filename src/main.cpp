@@ -25,6 +25,7 @@ void initialize()
         menu.close();
     }
     MenuData::writeData();
+    pros::delay(500);
 }
 
 /**
@@ -71,4 +72,7 @@ void autonomous() {}
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
-void opcontrol() {}
+void opcontrol()
+{
+
+}
