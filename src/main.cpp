@@ -25,6 +25,7 @@ void initialize()
         menu.close();
     }
     MenuData::writeData();
+    pros::delay(500);
 }
 
 /**
