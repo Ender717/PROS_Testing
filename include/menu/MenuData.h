@@ -26,100 +26,115 @@ private:
     static constexpr int BUFFER_SIZE = 20;
 
     /**
+     * The controlled instance
+     */
+    static MenuData* instance;
+
+    /**
      * The alliance setting
      */
-    static MenuTypes::Alliance alliance;
+    MenuTypes::Alliance alliance;
 
     /**
      * The auton setting
      */
-    static MenuTypes::Auton auton;
+    MenuTypes::Auton auton;
 
     /**
      * The config setting
      */
-    static MenuTypes::Config config;
+    MenuTypes::Config config;
 
     /**
      * The profile setting
      */
-    static MenuTypes::Profile profile;
+    MenuTypes::Profile profile;
 
     /**
      * The menu setting
      */
-    static MenuTypes::Submenu submenu;
+    MenuTypes::Submenu submenu;
+
+    /**
+     * Private constructor to prevent uncontrolled construction
+     */
+    MenuData();
 
 public:
     /**
-     * Sets the alliance setting
-     * @param alliance The alliance setting
+     * Gets the controlled instance of menu data
      */
-    static void setAlliance(MenuTypes::Alliance alliance);
+    static MenuData* getInstance();
+
+    /**
+     * Sets the alliance setting
+     * @param _alliance The alliance setting
+     */
+    void setAlliance(MenuTypes::Alliance _alliance);
 
     /**
      * Gets the alliance setting
      * @return The alliance setting
      */
-    static MenuTypes::Alliance getAlliance();
+    MenuTypes::Alliance getAlliance();
 
     /**
      * Sets the auton setting
-     * @param auton The auton setting
+     * @param _auton The auton setting
      */
-    static void setAuton(MenuTypes::Auton auton);
+    void setAuton(MenuTypes::Auton _auton);
 
     /**
      * Gets the auton setting
      * @return The auton setting
      */
-    static MenuTypes::Auton getAuton();
+    MenuTypes::Auton getAuton();
 
     /**
      * Sets the config setting
-     * @param config The config setting
+     * @param _config The config setting
      */
-    static void setConfig(MenuTypes::Config config);
+    void setConfig(MenuTypes::Config _config);
 
     /**
      * Gets the config setting
      * @return The config setting
      */
-    static MenuTypes::Config getConfig();
+    MenuTypes::Config getConfig();
 
     /**
      * Sets the profile setting
-     * @param profile The profile setting
+     * @param _profile The profile setting
      */
-    static void setProfile(MenuTypes::Profile profile);
+    void setProfile(MenuTypes::Profile _profile);
 
     /**
      * Gets the profile setting
      * @return The profile setting
      */
-    static MenuTypes::Profile getProfile();
+    MenuTypes::Profile getProfile();
 
     /**
      * Sets the submenu setting
-     * @param submenu The submenu setting
+     * @param _submenu The submenu setting
      */
-    static void setSubmenu(MenuTypes::Submenu submenu);
+    void setSubmenu(MenuTypes::Submenu _submenu);
 
     /**
      * Gets the submenu setting
      * @return The submenu setting
      */
-    static MenuTypes::Submenu getSubmenu();
+    MenuTypes::Submenu getSubmenu();
 
     /**
      * Reads the menu data from a file
      */
-    static void readData();
+    void readData();
 
     /**
      * Writes the menu data to a file
      */
-    static void writeData();
+    void writeData();
 };
 
 #endif

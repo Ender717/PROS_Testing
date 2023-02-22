@@ -11,7 +11,8 @@
 void initialize()
 {
     FileSystem::pcfs_initialize();
-    MenuData::readData();
+    MenuData* menuData = MenuData::getInstance();
+    menuData->readData();
     if (!pros::competition::is_connected() || pros::competition::is_disabled())
     {
         pros::Controller controller = pros::E_CONTROLLER_MASTER;
@@ -24,7 +25,7 @@ void initialize()
         }
         menu.close();
     }
-    MenuData::writeData();
+    menuData->writeData();
     pros::delay(500);
 }
 

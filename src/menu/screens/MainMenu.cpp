@@ -36,35 +36,35 @@ MainMenu::~MainMenu()
 lv_res_t MainMenu::startButtonEvent(lv_obj_t* button)
 {
     lv_obj_clean(lv_scr_act());
-    MenuData::setSubmenu(MenuTypes::Submenu::CLOSED);
+    MenuData::getInstance()->setSubmenu(MenuTypes::Submenu::CLOSED);
     return LV_RES_INV;
 }
 
 lv_res_t MainMenu::allianceButtonEvent(lv_obj_t* button)
 {
     lv_obj_clean(lv_scr_act());
-    MenuData::setSubmenu(MenuTypes::Submenu::ALLIANCE);
+    MenuData::getInstance()->setSubmenu(MenuTypes::Submenu::ALLIANCE);
     return LV_RES_INV;
 }
 
 lv_res_t MainMenu::autonButtonEvent(lv_obj_t* button)
 {
     lv_obj_clean(lv_scr_act());
-    MenuData::setSubmenu(MenuTypes::Submenu::AUTON);
+    MenuData::getInstance()->setSubmenu(MenuTypes::Submenu::AUTON);
     return LV_RES_INV;
 }
 
 lv_res_t MainMenu::configButtonEvent(lv_obj_t* button)
 {
     lv_obj_clean(lv_scr_act());
-    MenuData::setSubmenu(MenuTypes::Submenu::CONFIG);
+    MenuData::getInstance()->setSubmenu(MenuTypes::Submenu::CONFIG);
     return LV_RES_INV;
 }
 
 lv_res_t MainMenu::profileButtonEvent(lv_obj_t* button)
 {
     lv_obj_clean(lv_scr_act());
-    MenuData::setSubmenu(MenuTypes::Submenu::PROFILE);
+    MenuData::getInstance()->setSubmenu(MenuTypes::Submenu::PROFILE);
     return LV_RES_INV;
 }
 
@@ -103,7 +103,7 @@ void MainMenu::createAllianceButton()
 
     // Create the alliance button label
     char alliance_text[100];
-    int alliance = static_cast<int>(MenuData::getAlliance());
+    int alliance = static_cast<int>(MenuData::getInstance()->getAlliance());
     snprintf(alliance_text, 100, "ALLIANCE\n%s", MenuTypes::ALLIANCE_STR[alliance]);
     lv_obj_t* alliance_button_label = lv_label_create(alliance_button, NULL);
     lv_label_set_text(alliance_button_label, alliance_text);
@@ -123,7 +123,7 @@ void MainMenu::createAutonButton()
 
     // Create the auton button label
     char auton_text[100];
-    int auton = static_cast<int>(MenuData::getAuton());
+    int auton = static_cast<int>(MenuData::getInstance()->getAuton());
     snprintf(auton_text, 100, "AUTON\n%s", MenuTypes::AUTON_STR[auton]);
     lv_obj_t* auton_button_label = lv_label_create(auton_button, NULL);
     lv_label_set_text(auton_button_label, auton_text);
@@ -143,7 +143,7 @@ void MainMenu::createConfigButton()
 
     // Create the config button label
     char config_text[100];
-    int config = static_cast<int>(MenuData::getConfig());
+    int config = static_cast<int>(MenuData::getInstance()->getConfig());
     snprintf(config_text, 100, "CONFIG\n%s", MenuTypes::CONFIG_STR[config]);
     lv_obj_t* config_button_label = lv_label_create(config_button, NULL);
     lv_label_set_text(config_button_label, config_text);
@@ -163,7 +163,7 @@ void MainMenu::createProfileButton()
 
     // Create the profile button label
     char profile_text[100];
-    int profile = static_cast<int>(MenuData::getProfile());
+    int profile = static_cast<int>(MenuData::getInstance()->getProfile());
     snprintf(profile_text, 100, "PROFILE\n%s", MenuTypes::PROFILE_STR[profile]);
     lv_obj_t* profile_button_label = lv_label_create(profile_button, NULL);
     lv_label_set_text(profile_button_label, profile_text);

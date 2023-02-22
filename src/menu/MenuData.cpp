@@ -1,15 +1,27 @@
 // Included headers
 #include "menu/MenuData.h"
 
-MenuTypes::Alliance MenuData::alliance = MenuTypes::Alliance::BLUE;
-MenuTypes::Auton MenuData::auton = MenuTypes::Auton::BLUE_LEFT;
-MenuTypes::Config MenuData::config = MenuTypes::Config::BLUE;
-MenuTypes::Profile MenuData::profile = MenuTypes::Profile::HENRY;
-MenuTypes::Submenu MenuData::submenu = MenuTypes::Submenu::CLOSED;
+MenuData* MenuData::instance = nullptr;
 
-void MenuData::setAlliance(MenuTypes::Alliance alliance)
+MenuData::MenuData()
 {
-    MenuData::alliance = alliance;
+    alliance = MenuTypes::Alliance::BLUE;
+    auton = MenuTypes::Auton::BLUE_LEFT;
+    config = MenuTypes::Config::BLUE;
+    profile = MenuTypes::Profile::HENRY;
+    submenu = MenuTypes::Submenu::CLOSED;
+}
+
+MenuData* MenuData::getInstance()
+{
+    if (instance == nullptr)
+        instance = new MenuData;
+    return instance;
+}
+
+void MenuData::setAlliance(MenuTypes::Alliance _alliance)
+{
+    alliance = _alliance;
 }
 
 MenuTypes::Alliance MenuData::getAlliance()
@@ -17,9 +29,9 @@ MenuTypes::Alliance MenuData::getAlliance()
     return alliance;
 }
 
-void MenuData::setAuton(MenuTypes::Auton auton)
+void MenuData::setAuton(MenuTypes::Auton _auton)
 {
-    MenuData::auton = auton;
+    auton = _auton;
 }
 
 MenuTypes::Auton MenuData::getAuton()
@@ -27,9 +39,9 @@ MenuTypes::Auton MenuData::getAuton()
     return auton;
 }
 
-void MenuData::setConfig(MenuTypes::Config config)
+void MenuData::setConfig(MenuTypes::Config _config)
 {
-    MenuData::config = config;
+    config = _config;
 }
 
 MenuTypes::Config MenuData::getConfig()
@@ -37,9 +49,9 @@ MenuTypes::Config MenuData::getConfig()
     return config;
 }
 
-void MenuData::setProfile(MenuTypes::Profile profile)
+void MenuData::setProfile(MenuTypes::Profile _profile)
 {
-    MenuData::profile = profile;
+    profile = _profile;
 }
 
 MenuTypes::Profile MenuData::getProfile()
@@ -47,9 +59,9 @@ MenuTypes::Profile MenuData::getProfile()
     return profile;
 }
 
-void MenuData::setSubmenu(MenuTypes::Submenu submenu)
+void MenuData::setSubmenu(MenuTypes::Submenu _submenu)
 {
-    MenuData::submenu = submenu;
+    submenu = _submenu;
 }
 
 MenuTypes::Submenu MenuData::getSubmenu()
