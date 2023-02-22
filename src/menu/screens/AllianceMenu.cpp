@@ -3,7 +3,7 @@
 
 AllianceMenu::AllianceMenu() : OptionScreen(HEADER_FILE, MenuTypes::ALLIANCE_STR, MenuTypes::ALLIANCE_COUNT, BUTTONS_PER_LINE, static_cast<int>(MenuData::getAlliance()))
 {
-    lv_btnm_set_action(button_matrix, buttonEvent);
+    lv_btnm_set_action(lv_obj_get_child(lv_scr_act(), lv_obj_get_child(lv_scr_act(), NULL)), buttonEvent);
 }
 
 lv_res_t AllianceMenu::buttonEvent(lv_obj_t* buttonmatrix, const char* text)
@@ -19,7 +19,7 @@ lv_res_t AllianceMenu::buttonEvent(lv_obj_t* buttonmatrix, const char* text)
 
 void AllianceMenu::pressButton()
 {
-    buttonEvent(button_matrix, MenuTypes::ALLIANCE_STR[current_index]);
+    buttonEvent(lv_obj_get_child(lv_scr_act(), lv_obj_get_child(lv_scr_act(), NULL)), MenuTypes::ALLIANCE_STR[current_index]);
 }
 
 void AllianceMenu::update(pros::Controller& controller)

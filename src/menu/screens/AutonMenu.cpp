@@ -3,7 +3,7 @@
 
 AutonMenu::AutonMenu() : OptionScreen(HEADER_FILE, MenuTypes::AUTON_STR, MenuTypes::AUTON_COUNT, BUTTONS_PER_LINE, static_cast<int>(MenuData::getAuton()))
 {
-    lv_btnm_set_action(button_matrix, buttonEvent);
+    lv_btnm_set_action(lv_obj_get_child(lv_scr_act(), lv_obj_get_child(lv_scr_act(), NULL)), buttonEvent);
 }
 
 lv_res_t AutonMenu::buttonEvent(lv_obj_t* buttonmatrix, const char* text)
@@ -19,7 +19,7 @@ lv_res_t AutonMenu::buttonEvent(lv_obj_t* buttonmatrix, const char* text)
 
 void AutonMenu::pressButton()
 {
-    buttonEvent(button_matrix, MenuTypes::AUTON_STR[current_index]);
+    buttonEvent(lv_obj_get_child(lv_scr_act(), lv_obj_get_child(lv_scr_act(), NULL)), MenuTypes::AUTON_STR[current_index]);
 }
 
 void AutonMenu::update(pros::Controller& controller)

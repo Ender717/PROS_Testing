@@ -3,7 +3,7 @@
 
 ProfileMenu::ProfileMenu() : OptionScreen(HEADER_FILE, MenuTypes::PROFILE_STR, MenuTypes::PROFILE_COUNT, BUTTONS_PER_LINE, static_cast<int>(MenuData::getProfile()))
 {
-    lv_btnm_set_action(button_matrix, buttonEvent);
+    lv_btnm_set_action(lv_obj_get_child(lv_scr_act(), lv_obj_get_child(lv_scr_act(), NULL)), buttonEvent);
 }
 
 lv_res_t ProfileMenu::buttonEvent(lv_obj_t* buttonmatrix, const char* text)
@@ -19,7 +19,7 @@ lv_res_t ProfileMenu::buttonEvent(lv_obj_t* buttonmatrix, const char* text)
 
 void ProfileMenu::pressButton()
 {
-    buttonEvent(button_matrix, MenuTypes::PROFILE_STR[current_index]);
+    buttonEvent(lv_obj_get_child(lv_scr_act(), lv_obj_get_child(lv_scr_act(), NULL)), MenuTypes::PROFILE_STR[current_index]);
 }
 
 void ProfileMenu::update(pros::Controller& controller)

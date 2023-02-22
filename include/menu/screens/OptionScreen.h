@@ -15,6 +15,7 @@ protected:
     static constexpr int BUTTON_MATRIX_HEIGHT = 180;
     static constexpr int BUTTON_MATRIX_X = 10;
     static constexpr int BUTTON_MATRIX_Y = 50;
+    static constexpr int BUTTON_MATRIX_PADDING = 5;
 
     /**
      * The object styles
@@ -23,13 +24,6 @@ protected:
     static lv_style_t button_released_style;
     static lv_style_t button_pressed_style;
     static lv_style_t button_highlighted_style;
-
-    /**
-     * The lvgl objects used to draw the alliance menu screen
-     */
-    lv_obj_t* header;
-    lv_obj_t* button_matrix;
-    lv_obj_t* highlight_button;
 
     /**
      * The number of buttons per line for the button matrix
@@ -49,7 +43,7 @@ protected:
     /**
      * Methods to create each component of the menu screen
      */
-    void createHeader(const char* header_file);
+    void createBackground(const char* background_file);
     void createButtonMatrix(const char* matrix_labels[]);
     void createHighlightButton();
 
@@ -66,7 +60,7 @@ public:
     /**
      * Parameterized constructor
      */
-    OptionScreen(const char* header_file, const char* matrix_labels[], int _matrix_label_count, int _buttons_per_line, int _current_index);
+    OptionScreen(const char* background_file, const char* matrix_labels[], int _matrix_label_count, int _buttons_per_line, int _current_index);
 
     /**
      * Destructor

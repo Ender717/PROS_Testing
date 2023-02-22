@@ -23,7 +23,7 @@ private:
     /**
      * The name of the file containing the logo for the main menu
      */
-    static constexpr char LOGO_FILE[50] = "S:/usd/images/main_logo.bin";
+    static constexpr char BACKGROUND_FILE[50] = "S:/usd/images/main_menu.bin";
 
     /**
      * The button styles
@@ -32,21 +32,6 @@ private:
     static lv_style_t button_pressed_style;
     static lv_style_t button_highlighted_style;
     static lv_style_t button_label_style;
-
-    /**
-     * The lvgl objects used to draw the main menu screen
-     */
-    lv_obj_t* logo;
-    lv_obj_t* start_button;
-    lv_obj_t* start_button_label;
-    lv_obj_t* alliance_button;
-    lv_obj_t* alliance_button_label;
-    lv_obj_t* auton_button;
-    lv_obj_t* auton_button_label;
-    lv_obj_t* config_button;
-    lv_obj_t* config_button_label;
-    lv_obj_t* profile_button;
-    lv_obj_t* profile_button_label;
 
     /**
      * The currently highlighted button
@@ -66,12 +51,13 @@ private:
     /**
      * Methods to create each component of the menu screen
      */
-    void createLogo();
+    void createBackground();
     void createStartButton();
     void createAllianceButton();
     void createAutonButton();
     void createConfigButton();
     void createProfileButton();
+    void createHighlightButton();
 
     /**
      * Methods to interact with the highlighted button

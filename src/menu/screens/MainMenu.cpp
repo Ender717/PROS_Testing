@@ -14,89 +14,79 @@ MainMenu::MainMenu()
     lv_style_copy(&button_pressed_style, &lv_style_btn_pr);
     lv_style_copy(&button_highlighted_style, &lv_style_btn_rel);
     lv_style_copy(&button_label_style, &lv_style_plain);
+    button_highlighted_style.body.opa = LV_OPA_TRANSP;
     button_highlighted_style.body.border.color = LV_COLOR_RED;
     button_highlighted_style.body.border.width = 5;
     button_label_style.text.color = LV_COLOR_WHITE;
 
-    highlighted = Button::START;
-    createLogo();
+    createBackground();
     createStartButton();
     createAllianceButton();
     createAutonButton();
     createConfigButton();
     createProfileButton();
+    createHighlightButton();
 }
 
 MainMenu::~MainMenu()
 {
-    lv_obj_del(logo);
-    lv_obj_del(start_button);
-    lv_obj_del(alliance_button);
-    lv_obj_del(auton_button);
-    lv_obj_del(config_button);
-    lv_obj_del(profile_button);
-    logo = nullptr;
-    start_button = nullptr;
-    start_button_label = nullptr;
-    alliance_button = nullptr;
-    alliance_button_label = nullptr;
-    auton_button = nullptr;
-    auton_button_label = nullptr;
-    config_button = nullptr;
-    config_button_label = nullptr;
-    profile_button = nullptr;
-    profile_button_label = nullptr;
+
 }
 
 lv_res_t MainMenu::startButtonEvent(lv_obj_t* button)
 {
+    lv_obj_clean(lv_scr_act());
     MenuData::setSubmenu(MenuTypes::Submenu::CLOSED);
-    return LV_RES_OK;
+    return LV_RES_INV;
 }
 
 lv_res_t MainMenu::allianceButtonEvent(lv_obj_t* button)
 {
+    lv_obj_clean(lv_scr_act());
     MenuData::setSubmenu(MenuTypes::Submenu::ALLIANCE);
-    return LV_RES_OK;
+    return LV_RES_INV;
 }
 
 lv_res_t MainMenu::autonButtonEvent(lv_obj_t* button)
 {
+    lv_obj_clean(lv_scr_act());
     MenuData::setSubmenu(MenuTypes::Submenu::AUTON);
-    return LV_RES_OK;
+    return LV_RES_INV;
 }
 
 lv_res_t MainMenu::configButtonEvent(lv_obj_t* button)
 {
+    lv_obj_clean(lv_scr_act());
     MenuData::setSubmenu(MenuTypes::Submenu::CONFIG);
-    return LV_RES_OK;
+    return LV_RES_INV;
 }
 
 lv_res_t MainMenu::profileButtonEvent(lv_obj_t* button)
 {
+    lv_obj_clean(lv_scr_act());
     MenuData::setSubmenu(MenuTypes::Submenu::PROFILE);
-    return LV_RES_OK;
+    return LV_RES_INV;
 }
 
-void MainMenu::createLogo()
+void MainMenu::createBackground()
 {
-    logo = lv_img_create(lv_scr_act(), NULL);
-    lv_img_set_src(logo, LOGO_FILE);
-    lv_obj_set_pos(logo, 260, 10);
+    lv_obj_t* background = lv_img_create(lv_scr_act(), NULL);
+    lv_img_set_src(background, BACKGROUND_FILE);
+    lv_obj_set_pos(background, 0, 0);
 }
 
 void MainMenu::createStartButton()
 {
     // Create the start button
-    start_button = lv_btn_create(lv_scr_act(), NULL);
+    lv_obj_t* start_button = lv_btn_create(lv_scr_act(), NULL);
     lv_btn_set_action(start_button, LV_BTN_ACTION_CLICK, startButtonEvent);
-    lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+    lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_released_style);
     lv_btn_set_style(start_button, LV_BTN_STYLE_PR, &button_pressed_style);
     lv_obj_set_size(start_button, 200, 110);
     lv_obj_align(start_button, NULL, LV_ALIGN_IN_TOP_LEFT, 20, 20);
 
     // Create the start button label
-    start_button_label = lv_label_create(start_button, NULL);
+    lv_obj_t* start_button_label = lv_label_create(start_button, NULL);
     lv_label_set_text(start_button_label, "START");
     lv_label_set_style(start_button_label, &button_label_style);
 }
@@ -104,7 +94,7 @@ void MainMenu::createStartButton()
 void MainMenu::createAllianceButton()
 {
     // Create the alliance button
-    alliance_button = lv_btn_create(lv_scr_act(), NULL);
+    lv_obj_t* alliance_button = lv_btn_create(lv_scr_act(), NULL);
     lv_btn_set_action(alliance_button, LV_BTN_ACTION_CLICK, allianceButtonEvent);
     lv_btn_set_style(alliance_button, LV_BTN_STYLE_REL, &button_released_style);
     lv_btn_set_style(alliance_button, LV_BTN_STYLE_PR, &button_pressed_style);
@@ -115,7 +105,7 @@ void MainMenu::createAllianceButton()
     char alliance_text[100];
     int alliance = static_cast<int>(MenuData::getAlliance());
     snprintf(alliance_text, 100, "ALLIANCE\n%s", MenuTypes::ALLIANCE_STR[alliance]);
-    alliance_button_label = lv_label_create(alliance_button, NULL);
+    lv_obj_t* alliance_button_label = lv_label_create(alliance_button, NULL);
     lv_label_set_text(alliance_button_label, alliance_text);
     lv_label_set_style(alliance_button_label, &button_label_style);
     lv_label_set_align(alliance_button_label, LV_LABEL_ALIGN_CENTER);
@@ -124,7 +114,7 @@ void MainMenu::createAllianceButton()
 void MainMenu::createAutonButton()
 {
     // Create the auton button
-    auton_button = lv_btn_create(lv_scr_act(), NULL);
+    lv_obj_t* auton_button = lv_btn_create(lv_scr_act(), NULL);
     lv_btn_set_action(auton_button, LV_BTN_ACTION_CLICK, autonButtonEvent);
     lv_btn_set_style(auton_button, LV_BTN_STYLE_REL, &button_released_style);
     lv_btn_set_style(auton_button, LV_BTN_STYLE_PR, &button_pressed_style);
@@ -135,7 +125,7 @@ void MainMenu::createAutonButton()
     char auton_text[100];
     int auton = static_cast<int>(MenuData::getAuton());
     snprintf(auton_text, 100, "AUTON\n%s", MenuTypes::AUTON_STR[auton]);
-    auton_button_label = lv_label_create(auton_button, NULL);
+    lv_obj_t* auton_button_label = lv_label_create(auton_button, NULL);
     lv_label_set_text(auton_button_label, auton_text);
     lv_label_set_style(auton_button_label, &button_label_style);
     lv_label_set_align(auton_button_label, LV_LABEL_ALIGN_CENTER);
@@ -144,7 +134,7 @@ void MainMenu::createAutonButton()
 void MainMenu::createConfigButton()
 {
     // Create the config button
-    config_button = lv_btn_create(lv_scr_act(), NULL);
+    lv_obj_t* config_button = lv_btn_create(lv_scr_act(), NULL);
     lv_btn_set_action(config_button, LV_BTN_ACTION_CLICK, configButtonEvent);
     lv_btn_set_style(config_button, LV_BTN_STYLE_REL, &button_released_style);
     lv_btn_set_style(config_button, LV_BTN_STYLE_PR, &button_pressed_style);
@@ -155,7 +145,7 @@ void MainMenu::createConfigButton()
     char config_text[100];
     int config = static_cast<int>(MenuData::getConfig());
     snprintf(config_text, 100, "CONFIG\n%s", MenuTypes::CONFIG_STR[config]);
-    config_button_label = lv_label_create(config_button, NULL);
+    lv_obj_t* config_button_label = lv_label_create(config_button, NULL);
     lv_label_set_text(config_button_label, config_text);
     lv_label_set_style(config_button_label, &button_label_style);
     lv_label_set_align(config_button_label, LV_LABEL_ALIGN_CENTER);
@@ -164,7 +154,7 @@ void MainMenu::createConfigButton()
 void MainMenu::createProfileButton()
 {
     // Create the profile button
-    profile_button = lv_btn_create(lv_scr_act(), NULL);
+    lv_obj_t* profile_button = lv_btn_create(lv_scr_act(), NULL);
     lv_btn_set_action(profile_button, LV_BTN_ACTION_CLICK, profileButtonEvent);
     lv_btn_set_style(profile_button, LV_BTN_STYLE_REL, &button_released_style);
     lv_btn_set_style(profile_button, LV_BTN_STYLE_PR, &button_pressed_style);
@@ -175,10 +165,22 @@ void MainMenu::createProfileButton()
     char profile_text[100];
     int profile = static_cast<int>(MenuData::getProfile());
     snprintf(profile_text, 100, "PROFILE\n%s", MenuTypes::PROFILE_STR[profile]);
-    profile_button_label = lv_label_create(profile_button, NULL);
+    lv_obj_t* profile_button_label = lv_label_create(profile_button, NULL);
     lv_label_set_text(profile_button_label, profile_text);
     lv_label_set_style(profile_button_label, &button_label_style);
     lv_label_set_align(profile_button_label, LV_LABEL_ALIGN_CENTER);
+}
+
+void MainMenu::createHighlightButton()
+{
+    lv_obj_t* highlight_button = lv_btn_create(lv_scr_act(), NULL);
+    lv_btn_set_state(highlight_button, LV_BTN_STATE_INA);
+    lv_btn_set_style(highlight_button, LV_BTN_STYLE_INA, &button_highlighted_style);
+    lv_obj_set_click(highlight_button, false);
+    lv_obj_set_size(highlight_button, 200, 110);
+    lv_obj_align(highlight_button, NULL, LV_ALIGN_IN_TOP_LEFT, 20, 20);
+
+    highlighted = Button::START;
 }
 
 void MainMenu::moveHighlightLeft()
@@ -188,23 +190,19 @@ void MainMenu::moveHighlightLeft()
     case Button::START:
         break;
     case Button::ALLIANCE:
-        lv_btn_set_style(alliance_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(profile_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 362, 150);
         highlighted = Button::PROFILE;
         break;
     case Button::AUTON:
-        lv_btn_set_style(auton_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(alliance_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 8, 150);
         highlighted = Button::ALLIANCE;
         break;
     case Button::CONFIG:
-        lv_btn_set_style(config_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(auton_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 126, 150);
         highlighted = Button::AUTON;
         break;
     case Button::PROFILE:
-        lv_btn_set_style(profile_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(config_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 244, 150);
         highlighted = Button::CONFIG;
         break;
     }
@@ -217,23 +215,19 @@ void MainMenu::moveHighlightRight()
     case Button::START:
         break;
     case Button::ALLIANCE:
-        lv_btn_set_style(alliance_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(auton_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 126, 150);
         highlighted = Button::AUTON;
         break;
     case Button::AUTON:
-        lv_btn_set_style(auton_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(config_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 244, 150);
         highlighted = Button::CONFIG;
         break;
     case Button::CONFIG:
-        lv_btn_set_style(config_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(profile_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 362, 150);
         highlighted = Button::PROFILE;
         break;
     case Button::PROFILE:
-        lv_btn_set_style(profile_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(alliance_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 8, 150);
         highlighted = Button::ALLIANCE;
         break;
     }
@@ -241,65 +235,35 @@ void MainMenu::moveHighlightRight()
 
 void MainMenu::moveHighlightUp()
 {
-    switch (highlighted)
+    if (highlighted == Button::START)
     {
-    case Button::START:
-        lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(alliance_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        lv_obj_set_size(lv_obj_get_child(lv_scr_act(), NULL), 110, 70);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 8, 150);
         highlighted = Button::ALLIANCE;
-        break;
-    case Button::ALLIANCE:
-        lv_btn_set_style(alliance_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        highlighted = Button::ALLIANCE;
+    }
+    else
+    {
+        lv_obj_set_size(lv_obj_get_child(lv_scr_act(), NULL), 200, 110);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 20, 20);
         highlighted = Button::START;
-        break;
-    case Button::AUTON:
-        lv_btn_set_style(auton_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_highlighted_style);
-        highlighted = Button::START;
-        break;
-    case Button::CONFIG:
-        lv_btn_set_style(config_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_highlighted_style);
-        highlighted = Button::START;
-        break;
-    case Button::PROFILE:
-        lv_btn_set_style(profile_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_highlighted_style);
-        highlighted = Button::START;
-        break;
     }
 }
 
 void MainMenu::moveHighlightDown()
 {
-    switch (highlighted)
+    if (highlighted == Button::START)
     {
-    case Button::START:
-        lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(alliance_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        lv_obj_set_size(lv_obj_get_child(lv_scr_act(), NULL), 110, 70);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 8, 150);
         highlighted = Button::ALLIANCE;
-        break;
-    case Button::ALLIANCE:
-        lv_btn_set_style(alliance_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_highlighted_style);
+        highlighted = Button::ALLIANCE;
+    }
+    else
+    {
+        lv_obj_set_size(lv_obj_get_child(lv_scr_act(), NULL), 200, 110);
+        lv_obj_align(lv_obj_get_child(lv_scr_act(), NULL), NULL, LV_ALIGN_IN_TOP_LEFT, 20, 20);
         highlighted = Button::START;
-        break;
-    case Button::AUTON:
-        lv_btn_set_style(auton_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_highlighted_style);
-        highlighted = Button::START;
-        break;
-    case Button::CONFIG:
-        lv_btn_set_style(config_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_highlighted_style);
-        highlighted = Button::START;
-        break;
-    case Button::PROFILE:
-        lv_btn_set_style(profile_button, LV_BTN_STYLE_REL, &button_released_style);
-        lv_btn_set_style(start_button, LV_BTN_STYLE_REL, &button_highlighted_style);
-        highlighted = Button::START;
-        break;
     }
 }
 
@@ -308,24 +272,19 @@ void MainMenu::pressButton()
     switch (highlighted)
     {
         case Button::START:
-            lv_btn_set_state(start_button, LV_BTN_STATE_PR);
-            startButtonEvent(start_button);
+            startButtonEvent(lv_obj_get_child(lv_scr_act(), NULL));
             break;
         case Button::ALLIANCE:
-            lv_btn_set_state(alliance_button, LV_BTN_STATE_PR);
-            allianceButtonEvent(alliance_button);
+            allianceButtonEvent(lv_obj_get_child(lv_scr_act(), NULL));
             break;
         case Button::AUTON:
-            lv_btn_set_state(auton_button, LV_BTN_STATE_PR);
-            autonButtonEvent(auton_button);
+            autonButtonEvent(lv_obj_get_child(lv_scr_act(), NULL));
             break;
         case Button::CONFIG:
-            lv_btn_set_state(config_button, LV_BTN_STATE_PR);
-            configButtonEvent(config_button);
+            configButtonEvent(lv_obj_get_child(lv_scr_act(), NULL));
             break;
         case Button::PROFILE:
-            lv_btn_set_state(profile_button, LV_BTN_STATE_PR);
-            profileButtonEvent(profile_button);
+            profileButtonEvent(lv_obj_get_child(lv_scr_act(), NULL));
             break;
     }
 }

@@ -11,7 +11,7 @@ private:
     /**
      * The name of the file containing the header for the config menu
      */
-    static constexpr char HEADER_FILE[50] = "S:/usd/images/config_header.bin";
+    static constexpr char HEADER_FILE[50] = "S:/usd/images/config_menu.bin";
 
     /**
      * The configuration info for the button matrix

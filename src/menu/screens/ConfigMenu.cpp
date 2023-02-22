@@ -3,7 +3,7 @@
 
 ConfigMenu::ConfigMenu() : OptionScreen(HEADER_FILE, MenuTypes::CONFIG_STR, MenuTypes::CONFIG_COUNT, BUTTONS_PER_LINE, static_cast<int>(MenuData::getConfig()))
 {
-    lv_btnm_set_action(button_matrix, buttonEvent);
+    lv_btnm_set_action(lv_obj_get_child(lv_scr_act(), lv_obj_get_child(lv_scr_act(), NULL)), buttonEvent);
 }
 
 lv_res_t ConfigMenu::buttonEvent(lv_obj_t* buttonmatrix, const char* text)
@@ -19,7 +19,7 @@ lv_res_t ConfigMenu::buttonEvent(lv_obj_t* buttonmatrix, const char* text)
 
 void ConfigMenu::pressButton()
 {
-    buttonEvent(button_matrix, MenuTypes::CONFIG_STR[current_index]);
+    buttonEvent(lv_obj_get_child(lv_scr_act(), lv_obj_get_child(lv_scr_act(), NULL)), MenuTypes::CONFIG_STR[current_index]);
 }
 
 void ConfigMenu::update(pros::Controller& controller)

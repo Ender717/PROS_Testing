@@ -20,12 +20,11 @@ void initialize()
         while(menu.isRunning())
         {
             menu.update(controller);
-            pros::delay(30);
+            pros::delay(10);
         }
         menu.close();
     }
     MenuData::writeData();
-    pros::delay(500);
 }
 
 /**
