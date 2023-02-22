@@ -5,6 +5,10 @@
 // Included headers
 #include "OptionScreen.h"
 
+/**
+ * This class manages the profile menu screen
+ * @author Nathan Sandvig
+ */
 class ProfileMenu : public OptionScreen
 {
 private:

@@ -5,6 +5,10 @@
 // Included headers
 #include "MenuScreen.h"
 
+/**
+ * This class manages any menu screen which handles option selection
+ * @author Nathan Sandvig
+ */
 class OptionScreen : public MenuScreen
 {
 protected:

@@ -5,6 +5,10 @@
 // Included headers
 #include "OptionScreen.h"
 
+/**
+ * This class manages the alliance menu screen
+ * @author Nathan Sandvig
+ */
 class AllianceMenu : public OptionScreen
 {
 private:

@@ -5,6 +5,10 @@
 // Included headers
 #include "OptionScreen.h"
 
+/**
+ * This class manages the auton menu screen
+ * @author Nathan Sandvig
+ */
 class AutonMenu : public OptionScreen
 {
 private:

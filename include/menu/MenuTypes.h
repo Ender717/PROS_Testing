@@ -2,6 +2,10 @@
 #ifndef MENU_TYPES_H
 #define MENU_TYPES_H
 
+/**
+ * This namespace holds all types used by the menu system
+ * @author Nathan Sandvig
+ */
 namespace MenuTypes
 {
     /**

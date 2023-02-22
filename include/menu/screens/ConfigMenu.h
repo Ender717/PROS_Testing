@@ -5,6 +5,10 @@
 // Included headers
 #include "OptionScreen.h"
 
+/**
+ * This class manages the config menu
+ * @author Nathan Sandvig
+ */
 class ConfigMenu : public OptionScreen
 {
 private:

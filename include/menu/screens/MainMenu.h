@@ -5,6 +5,10 @@
 // Included headers
 #include "MenuScreen.h"
 
+/**
+ * This class manages the main menu screen
+ * @author Nathan Sandvig
+ */
 class MainMenu : public MenuScreen
 {
 private:
