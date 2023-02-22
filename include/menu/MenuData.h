@@ -62,6 +62,16 @@ private:
 
 public:
     /**
+     * Remove the copy constructor
+     */
+    MenuData(const MenuData& copy) = delete;
+
+    /**
+     * Remove the assignment operator
+     */
+    MenuData& operator=(const MenuData& rhs) = delete;
+
+    /**
      * Gets the controlled instance of menu data
      */
     static MenuData* getInstance();

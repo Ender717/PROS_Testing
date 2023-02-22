@@ -3,6 +3,7 @@
 #define ROBOT_H
 
 // Included headers
+#include "subsystems/Subsystems.h"
 
 /**
  * This class manages a singleton robot
@@ -15,6 +16,11 @@ private:
      * The singleton instance of the robot
      */
     static Robot* instance;
+
+    /**
+     * The odometry system for the robot
+     */
+    Odometry* odometry;
 
     /**
      * Private constructor to prevent uncontrolled construction
@@ -36,6 +42,18 @@ public:
      * Gets the singleton instance of the robot
      */
     static Robot* getInstance();
+
+    /**
+     * Sets the odometry system of the robot
+     * @param _odometry The new odometry system
+     */
+    void setOdometry(Odometry _odometry);
+
+    /**
+     * Gets the odometry system of the robot
+     * @return The odometry system
+     */
+    Odometry* getOdometry();
 };
 
 #endif

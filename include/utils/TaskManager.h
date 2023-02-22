@@ -33,6 +33,16 @@ private:
 
 public:
     /**
+     * Remove the copy constructor
+     */
+    TaskManager(const TaskManager& copy) = delete;
+
+    /**
+     * Remove the assignment operator
+     */
+    TaskManager& operator=(const TaskManager& rhs) = delete;
+
+    /**
      * Destructor
      */
     ~TaskManager();
