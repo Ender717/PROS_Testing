@@ -7,51 +7,39 @@ Database::Database()
     reading = 0;
 }
 
-Database::~Database()
-{
-    for (pros::Task* task : writers)
-    {
-        task->remove();
-        delete task;
-    }
-
-    for (pros::Task* task : readers)
-    {
-        task->remove();
-        delete task;
-    }
-}
-
 void Database::addReader()
 {
+    TaskManager* taskManager = TaskManager::getInstance();
     if (writing == 0 && writers.empty())
         reading++;
     else
     {
-        pros::Task task = pros::Task::current();
-        readers.push_back(&task);
-        task.suspend();
+        std::string taskName = pros::Task::current().get_name();
+        readers.push_back(taskName);
+        taskManager->getTask(taskName)->suspend();
     }
 }
 
 void Database::addWriter()
 {
+    TaskManager* taskManager = TaskManager::getInstance();
     if (writing == 0 && reading == 0)
         writing++;
     else
     {
-        pros::Task task = pros::Task::current();
-        writers.push_back(&task);
-        task.suspend();
+        std::string taskName = pros::Task::current().get_name();
+        writers.push_back(taskName);
+        taskManager->getTask(taskName)->suspend();
     }
 }
 
 void Database::removeReader()
 {
+    TaskManager* taskManager = TaskManager::getInstance();
     reading--;
     if (reading == 0 && !writers.empty())
     {
-        writers.front()->resume();
+        taskManager->getTask(writers.front())->resume();
         writers.erase(writers.begin());
         writing++;
     }
@@ -59,20 +47,21 @@ void Database::removeReader()
 
 void Database::removeWriter()
 {
+    TaskManager* taskManager = TaskManager::getInstance();
     writing--;
     if (writing == 0)
     {
         if (!writers.empty())
         {
-            writers.front()->resume();
+            taskManager->getTask(writers.front())->resume();
             writers.erase(writers.begin());
             writing++;
         }
         else if (!readers.empty())
         {
-            for (pros::Task* task : readers)
+            for (std::string taskName : readers)
             {
-                task->resume();
+                taskManager->getTask(taskName)->resume();
                 reading++;
             }
             readers.clear();

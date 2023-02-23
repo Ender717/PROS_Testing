@@ -7,6 +7,7 @@
 
 // Included headers
 #include "main.h"
+#include "TaskManager.h"
 
 /**
  * This class manages a classical database thread manager
@@ -16,14 +17,14 @@ class Database
 {
 private:
     /**
-     * Tasks waiting to write
+     * Names of tasks waiting to write
      */
-    std::vector<pros::Task*> writers;
+    std::vector<std::string> writers;
 
     /**
-     * Tasks waiting to read
+     * Names of tasks waiting to read
      */
-    std::vector<pros::Task*> readers;
+    std::vector<std::string> readers;
 
     /**
      * The number of tasks writing data
@@ -40,11 +41,6 @@ public:
      * Default constructor
      */
     Database();
-
-    /**
-     * Destructor
-     */
-    ~Database();
 
     /**
      * Adds a reader task to the database
