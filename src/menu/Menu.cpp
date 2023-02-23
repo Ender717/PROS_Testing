@@ -20,7 +20,7 @@ Menu::~Menu()
 void Menu::open()
 {
     currentMenu = MenuTypes::Submenu::MAIN;
-    MenuData::setSubmenu(MenuTypes::Submenu::MAIN);
+    MenuData::getInstance()->setSubmenu(MenuTypes::Submenu::MAIN);
     currentScreen = new MainMenu;
     running = true;
 }
@@ -28,7 +28,7 @@ void Menu::open()
 void Menu::close()
 {
     currentMenu = MenuTypes::Submenu::CLOSED;
-    MenuData::setSubmenu(MenuTypes::Submenu::CLOSED);
+    MenuData::getInstance()->setSubmenu(MenuTypes::Submenu::CLOSED);
     if (currentScreen != nullptr)
     {
         delete currentScreen;
@@ -39,8 +39,9 @@ void Menu::close()
 
 void Menu::update(pros::Controller& controller)
 {
+    MenuData* menuData = MenuData::getInstance();
     // Check for a submenu update
-    if (currentMenu == MenuData::getSubmenu())
+    if (currentMenu == menuData->getSubmenu())
     {
         if (currentScreen != nullptr)
             currentScreen->update(controller);
@@ -55,7 +56,7 @@ void Menu::update(pros::Controller& controller)
     }
 
     // Update the submenu
-    currentMenu = MenuData::getSubmenu();
+    currentMenu = menuData->getSubmenu();
 
     // Open the next menu
     switch(currentMenu)

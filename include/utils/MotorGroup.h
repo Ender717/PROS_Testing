@@ -175,7 +175,7 @@ public:
      * @param timestamp The timestamp to fetch the position from
      * @return The raw position of the motors at a given timestamp
      */
-    int get_raw_position(unsigned int* timestamp);
+    int get_raw_position(uint32_t* timestamp);
 
     /**
      * Gets the temperature of the motors
@@ -295,6 +295,13 @@ public:
      * Resets the motors' positions to absolute 0
      */
     void tare_position();
+
+    /**
+     * Assignment operator overload
+     * @param rhs The MotorGroup on the right hand side of the operator
+     * @return This MotorGroup with the assigned values
+     */
+    MotorGroup& operator=(const MotorGroup& rhs);
 };
 
 #endif

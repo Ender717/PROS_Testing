@@ -191,7 +191,7 @@ double MotorGroup::get_power()
     return power;
 }
 
-int MotorGroup::get_raw_position(unsigned int* timestamp)
+int MotorGroup::get_raw_position(uint32_t* timestamp)
 {
     int position = 0;
     for (pros::Motor motor : motors)
@@ -351,4 +351,12 @@ void MotorGroup::tare_position()
 {
     for (pros::Motor motor : motors)
         motor.tare_position();
+}
+
+MotorGroup& MotorGroup::operator=(const MotorGroup& rhs)
+{
+    motors.clear();
+    for (pros::Motor motor : rhs.motors)
+        motors.push_back(motor);
+    return *this;
 }
