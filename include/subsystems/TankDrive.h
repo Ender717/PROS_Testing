@@ -86,6 +86,18 @@ private:
     static void runTankDrive(void* params);
 
     /**
+     * The velocity of the left side of the drive
+     * @return The velocity of the left side of the drive
+     */
+    double leftVelocity();
+
+    /**
+     * The velocity of the right side of the drive
+     * @return The velocity of the right side of the drive
+     */
+    double rightVelocity();
+
+    /**
      * Updates the tank drive
      */
     void update();

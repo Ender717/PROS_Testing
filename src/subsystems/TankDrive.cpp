@@ -56,6 +56,22 @@ TankDrive::TankDrive(const TankDrive& copy)
     running = false;
 }
 
+double TankDrive::leftVelocity()
+{
+    double velocity = 0.0;
+    for (int i = 0; i < VELOCITY_BUFFER; i++)
+        velocity += leftV[i];
+    return velocity / VELOCITY_BUFFER;
+}
+
+double TankDrive::rightVelocity()
+{
+    double velocity = 0.0;
+    for (int i = 0; i < VELOCITY_BUFFER; i++)
+        velocity += rightV[i];
+    return velocity / VELOCITY_BUFFER;
+}
+
 void TankDrive::update()
 {
     mutex.take();
@@ -179,26 +195,18 @@ void TankDrive::setVelocity(double leftV, double rightV)
 
 double TankDrive::getLeftVelocity()
 {
-    double velocity = 0.0;
-
     mutex.take();
-    for (int i = 0; i < VELOCITY_BUFFER; i++)
-        velocity += leftV[i];
+    double velocity = leftVelocity();
     mutex.give();
-
-    return velocity / VELOCITY_BUFFER;
+    return velocity;
 }
 
 double TankDrive::getRightVelocity()
 {
-    double velocity = 0.0;
-
     mutex.take();
-    for (int i = 0; i < VELOCITY_BUFFER; i++)
-        velocity += rightV[i];
+    double velocity = rightVelocity();
     mutex.give();
-
-    return velocity / VELOCITY_BUFFER;
+    return velocity;
 }
 
 void TankDrive::switchGear()
