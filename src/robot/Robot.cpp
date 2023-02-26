@@ -1,28 +1,32 @@
 // Included headers
 #include "robot/Robot.h"
 
-Robot* Robot::instance = nullptr;
-
-Robot::Robot()
+void Robot::setOdometry(Odometry& _odometry)
 {
-
+    mutex.take();
+    odometry = _odometry;
+    mutex.give();
 }
 
-Robot* Robot::getInstance()
+Odometry& Robot::getOdometry()
 {
-    if (instance == nullptr)
-        instance = new Robot;
-    return instance;
+    mutex.take();
+    Odometry& result = odometry;
+    mutex.give();
+    return result;
 }
 
-void Robot::setOdometry(Odometry _odometry)
+void Robot::setTankDrive(TankDrive& _tankDrive)
 {
-    if (odometry != nullptr)
-        delete odometry;
-    odometry = new Odometry(_odometry);
+    mutex.take();
+    tankDrive = _tankDrive;
+    mutex.give();
 }
 
-Odometry* Robot::getOdometry()
+TankDrive& Robot::getTankDrive()
 {
-    return odometry;
+    mutex.take();
+    TankDrive& result = tankDrive;
+    mutex.give();
+    return result;
 }

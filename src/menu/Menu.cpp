@@ -19,29 +19,34 @@ Menu::~Menu()
 
 void Menu::open()
 {
+    mutex.take();
     currentMenu = MenuTypes::Submenu::MAIN;
-    MenuData::getInstance()->setSubmenu(MenuTypes::Submenu::MAIN);
+    MenuData::setSubmenu(MenuTypes::Submenu::MAIN);
     currentScreen = new MainMenu;
     running = true;
+    mutex.give();
 }
 
 void Menu::close()
 {
+    mutex.take();
     currentMenu = MenuTypes::Submenu::CLOSED;
-    MenuData::getInstance()->setSubmenu(MenuTypes::Submenu::CLOSED);
+    MenuData::setSubmenu(MenuTypes::Submenu::CLOSED);
     if (currentScreen != nullptr)
     {
         delete currentScreen;
         currentScreen = nullptr;
     }
     running = false;
+    mutex.give();
 }
 
 void Menu::update(pros::Controller& controller)
 {
-    MenuData* menuData = MenuData::getInstance();
+    mutex.take();
+
     // Check for a submenu update
-    if (currentMenu == menuData->getSubmenu())
+    if (currentMenu == MenuData::getSubmenu())
     {
         if (currentScreen != nullptr)
             currentScreen->update(controller);
@@ -56,7 +61,7 @@ void Menu::update(pros::Controller& controller)
     }
 
     // Update the submenu
-    currentMenu = menuData->getSubmenu();
+    currentMenu = MenuData::getSubmenu();
 
     // Open the next menu
     switch(currentMenu)
@@ -80,9 +85,14 @@ void Menu::update(pros::Controller& controller)
             running = false;
             break;
     }
+
+    mutex.give();
 }
 
 bool Menu::isRunning()
 {
-    return running;
+    mutex.take();
+    bool result = running;
+    mutex.give();
+    return result;
 }

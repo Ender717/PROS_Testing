@@ -13,9 +13,9 @@ class AllianceMenu : public OptionScreen
 {
 private:
     /**
-     * The name of the file containing the header for the alliance menu
+     * The name of the file containing the background for the alliance menu
      */
-    static constexpr char HEADER_FILE[50] = "S:/usd/images/alliance_menu.bin";
+    static constexpr char BACKGROUND_FILE[50] = "S:/usd/images/alliance_menu.bin";
 
     /**
      * The configuration info for the button matrix

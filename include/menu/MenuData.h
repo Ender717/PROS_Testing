@@ -6,6 +6,7 @@
 #include <fstream>
 
 // Included headers
+#include "main.h"
 #include "MenuTypes.h"
 
 /**
@@ -26,125 +27,105 @@ private:
     static constexpr int BUFFER_SIZE = 20;
 
     /**
-     * The controlled instance
+     * The mutex that keeps the menu data threadsafe
      */
-    static MenuData* instance;
+    static pros::Mutex mutex;
 
     /**
      * The alliance setting
      */
-    MenuTypes::Alliance alliance;
+    static MenuTypes::Alliance alliance;
 
     /**
      * The auton setting
      */
-    MenuTypes::Auton auton;
+    static MenuTypes::Auton auton;
 
     /**
      * The config setting
      */
-    MenuTypes::Config config;
+    static MenuTypes::Config config;
 
     /**
      * The profile setting
      */
-    MenuTypes::Profile profile;
+    static MenuTypes::Profile profile;
 
     /**
      * The menu setting
      */
-    MenuTypes::Submenu submenu;
-
-    /**
-     * Private constructor to prevent uncontrolled construction
-     */
-    MenuData();
+    static MenuTypes::Submenu submenu;
 
 public:
     /**
-     * Remove the copy constructor
+     * Sets the alliance in the menu data
+     * @param _alliance The new alliance
      */
-    MenuData(const MenuData& copy) = delete;
+    static void setAlliance(MenuTypes::Alliance _alliance);
 
     /**
-     * Remove the assignment operator
-     */
-    MenuData& operator=(const MenuData& rhs) = delete;
-
-    /**
-     * Gets the controlled instance of menu data
-     */
-    static MenuData* getInstance();
-
-    /**
-     * Sets the alliance setting
-     * @param _alliance The alliance setting
-     */
-    void setAlliance(MenuTypes::Alliance _alliance);
-
-    /**
-     * Gets the alliance setting
+     * Gets the alliance setting from the menu data
      * @return The alliance setting
      */
-    MenuTypes::Alliance getAlliance();
+    static MenuTypes::Alliance getAlliance();
 
     /**
-     * Sets the auton setting
-     * @param _auton The auton setting
+     * Sets the auton in the menu data
+     * @param _auton The new auton
      */
-    void setAuton(MenuTypes::Auton _auton);
+    static void setAuton(MenuTypes::Auton _auton);
 
     /**
-     * Gets the auton setting
+     * Gets the auton setting from the menu data
      * @return The auton setting
      */
-    MenuTypes::Auton getAuton();
+    static MenuTypes::Auton getAuton();
 
     /**
-     * Sets the config setting
-     * @param _config The config setting
+     * Sets the config in the menu data
+     * @param _config The new config
      */
-    void setConfig(MenuTypes::Config _config);
+    static void setConfig(MenuTypes::Config _config);
 
     /**
-     * Gets the config setting
+     * Gets the config setting from the menu data
      * @return The config setting
      */
-    MenuTypes::Config getConfig();
+    static MenuTypes::Config getConfig();
 
     /**
-     * Sets the profile setting
+     * Sets the profile in the menu data
      * @param _profile The profile setting
      */
-    void setProfile(MenuTypes::Profile _profile);
+    static void setProfile(MenuTypes::Profile _profile);
 
     /**
-     * Gets the profile setting
+     * Gets the profile setting from the menu data
      * @return The profile setting
      */
-    MenuTypes::Profile getProfile();
+    static MenuTypes::Profile getProfile();
 
     /**
-     * Sets the submenu setting
+     * Sets the submenu in the menu data
      * @param _submenu The submenu setting
      */
-    void setSubmenu(MenuTypes::Submenu _submenu);
+    static void setSubmenu(MenuTypes::Submenu _submenu);
 
     /**
-     * Gets the submenu setting
+     * Gets the submenu setting from the menu data
      * @return The submenu setting
      */
-    MenuTypes::Submenu getSubmenu();
+    static MenuTypes::Submenu getSubmenu();
 
     /**
      * Reads the menu data from a file
      */
-    void readData();
+    static void readData();
 
     /**
      * Writes the menu data to a file
      */
-    void writeData();
+    static void writeData();
 };
 
 #endif

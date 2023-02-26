@@ -13,47 +13,44 @@ class Robot
 {
 private:
     /**
-     * The singleton instance of the robot
+     * The mutex which keeps the robot threadsafe
      */
-    static Robot* instance;
+    static pros::Mutex mutex;
 
     /**
      * The odometry system for the robot
      */
-    Odometry* odometry;
+    static Odometry odometry;
 
     /**
-     * Private constructor to prevent uncontrolled construction
+     * The tank drive for the robot
      */
-    Robot();
+    static TankDrive tankDrive;
 
 public:
-    /**
-     * Remove the copy constructor
-     */
-    Robot(const Robot& copy) = delete;
-
-    /**
-     * Remove the assignment operator
-     */
-    Robot& operator=(const Robot& rhs) = delete;
-
-    /**
-     * Gets the singleton instance of the robot
-     */
-    static Robot* getInstance();
-
     /**
      * Sets the odometry system of the robot
      * @param _odometry The new odometry system
      */
-    void setOdometry(Odometry _odometry);
+    static void setOdometry(Odometry& _odometry);
 
     /**
      * Gets the odometry system of the robot
      * @return The odometry system
      */
-    Odometry* getOdometry();
+    static Odometry& getOdometry();
+
+    /**
+     * Sets the tank drive of the robot
+     * @param _tankDrive The new tank drive
+     */
+    static void setTankDrive(TankDrive& _tankDrive);
+
+    /**
+     * Gets the tank drive of the robot
+     * @return The tank drive
+     */
+    static TankDrive& getTankDrive();
 };
 
 #endif

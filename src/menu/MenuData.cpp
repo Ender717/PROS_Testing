@@ -1,76 +1,85 @@
 // Included headers
 #include "menu/MenuData.h"
 
-MenuData* MenuData::instance = nullptr;
-
-MenuData::MenuData()
-{
-    alliance = MenuTypes::Alliance::BLUE;
-    auton = MenuTypes::Auton::BLUE_LEFT;
-    config = MenuTypes::Config::BLUE;
-    profile = MenuTypes::Profile::HENRY;
-    submenu = MenuTypes::Submenu::CLOSED;
-}
-
-MenuData* MenuData::getInstance()
-{
-    if (instance == nullptr)
-        instance = new MenuData;
-    return instance;
-}
-
 void MenuData::setAlliance(MenuTypes::Alliance _alliance)
 {
+    mutex.take();
     alliance = _alliance;
+    mutex.give();
 }
 
 MenuTypes::Alliance MenuData::getAlliance()
 {
-    return alliance;
+    mutex.take();
+    MenuTypes::Alliance result = alliance;
+    mutex.give();
+    return result;
 }
 
 void MenuData::setAuton(MenuTypes::Auton _auton)
 {
+    mutex.take();
     auton = _auton;
+    mutex.give();
 }
 
 MenuTypes::Auton MenuData::getAuton()
 {
-    return auton;
+    mutex.take();
+    MenuTypes::Auton result = auton;
+    mutex.give();
+    return result;
 }
 
 void MenuData::setConfig(MenuTypes::Config _config)
 {
+    mutex.take();
     config = _config;
+    mutex.give();
 }
 
 MenuTypes::Config MenuData::getConfig()
 {
-    return config;
+    mutex.take();
+    MenuTypes::Config result = config;
+    mutex.give();
+    return result;
 }
 
 void MenuData::setProfile(MenuTypes::Profile _profile)
 {
+    mutex.take();
     profile = _profile;
+    mutex.give();
 }
 
 MenuTypes::Profile MenuData::getProfile()
 {
-    return profile;
+    mutex.take();
+    MenuTypes::Profile result = profile;
+    mutex.give();
+    return result;
 }
 
 void MenuData::setSubmenu(MenuTypes::Submenu _submenu)
 {
+    mutex.take();
     submenu = _submenu;
+    mutex.give();
 }
 
 MenuTypes::Submenu MenuData::getSubmenu()
 {
-    return submenu;
+    mutex.take();
+    MenuTypes::Submenu result = submenu;
+    mutex.give();
+    return result;
 }
 
 void MenuData::readData()
 {
+    mutex.take();
+
     // Open the input file
     std::ifstream input(MENU_FILE);
     if (input.fail())
@@ -109,10 +118,14 @@ void MenuData::readData()
 
     // Close the input file
     input.close();
+
+    mutex.give();
 }
 
 void MenuData::writeData()
 {
+    mutex.take();
+
     // Open the output file
     std::ofstream output(MENU_FILE);
     if (output.fail())
@@ -129,4 +142,6 @@ void MenuData::writeData()
 
     // Close the output file
     output.close();
+
+    mutex.give();
 }

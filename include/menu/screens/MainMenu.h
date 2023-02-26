@@ -25,7 +25,7 @@ private:
     };
 
     /**
-     * The name of the file containing the logo for the main menu
+     * The name of the file containing the background for the main menu
      */
     static constexpr char BACKGROUND_FILE[50] = "S:/usd/images/main_menu.bin";
 

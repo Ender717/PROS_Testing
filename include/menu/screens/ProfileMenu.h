@@ -13,9 +13,9 @@ class ProfileMenu : public OptionScreen
 {
 private:
     /**
-     * The name of the file containing the header for the profile menu
+     * The name of the file containing the background for the profile menu
      */
-    static constexpr char HEADER_FILE[50] = "S:/usd/images/profile_menu.bin";
+    static constexpr char BACKGROUND_FILE[50] = "S:/usd/images/profile_menu.bin";
 
     /**
      * The configuration info for the button matrix

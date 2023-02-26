@@ -14,6 +14,11 @@ class PID
 {
 private:
     /**
+     * The mutex to keep the PID controller threadsafe
+     */
+    pros::Mutex mutex;
+
+    /**
      * Control constants
      */
     double kp;
@@ -66,6 +71,12 @@ public:
     PID(double _kp, double _ki, double _kd);
 
     /**
+     * Copy constructor
+     * @param copy The PID controller being copied
+     */
+    PID(const PID& copy);
+
+    /**
      * Sets the saturation limit for the integral
      * @param _sat The new saturation limit
      */
@@ -90,6 +101,13 @@ public:
      * @return The calculated control value
      */
     double getValue(double current);
+
+    /**
+     * Assignment operator overload for PID
+     * @param rhs The PID on the right hand side of the operator
+     * @return This PID controller with the assigned values
+     */
+    PID& operator=(const PID& rhs);
 };
 
 #endif

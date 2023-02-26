@@ -15,6 +15,11 @@ class Menu
 {
 private:
     /**
+     * The mutex which keeps the menu threadsafe
+     */
+    pros::Mutex mutex;
+
+    /**
      * The current menu type
      */
     MenuTypes::Submenu currentMenu;

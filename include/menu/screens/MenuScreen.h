@@ -13,6 +13,12 @@
  */
 class MenuScreen
 {
+protected:
+    /**
+     * The mutex to make the menu screen threadsafe
+     */
+    pros::Mutex mutex;
+
 public:
     /**
      * Virtual destructor

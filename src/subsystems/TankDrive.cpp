@@ -219,7 +219,10 @@ void TankDrive::switchGear()
 
 bool TankDrive::isLowGear()
 {
-    return lowGear;
+    mutex.take();
+    bool result = lowGear;
+    mutex.give();
+    return result;
 }
 
 TankDrive& TankDrive::operator=(const TankDrive& rhs)

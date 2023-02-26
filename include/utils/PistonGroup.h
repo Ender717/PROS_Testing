@@ -16,6 +16,11 @@ class PistonGroup
 {
 private:
     /**
+     * The mutex to keep the Piston group threadsafe
+     */
+    pros::Mutex mutex;
+
+    /**
      * The pistons in the group
      */
     std::vector<pros::ADIDigitalOut> pistons;

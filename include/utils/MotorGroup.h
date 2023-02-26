@@ -22,6 +22,11 @@ private:
     std::vector<pros::Motor> motors;
 
     /**
+     * The mutex to keep the motor group threadsafe
+     */
+    pros::Mutex mutex;
+
+    /**
      * Binds a power level to a valid range
      * @param power The input power level
      * @return The power level bound from (-127, 127)
@@ -120,7 +125,7 @@ public:
      * Gets the target velocity for a profiled movement
      * @return The target velocity
      */
-    double get_target_velocity();
+    int get_target_velocity();
 
     /**
      * Gets the actual velocity of the motors
