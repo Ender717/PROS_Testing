@@ -59,7 +59,7 @@ public:
      * Adds a motor to the group
      * @param motor The motor being added
      */
-    void add_motor(pros::Motor motor);
+    void add_motor(pros::Motor& motor);
 
     /**
      * Gets the size of the motor group

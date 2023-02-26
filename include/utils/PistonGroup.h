@@ -41,7 +41,7 @@ public:
      * Adds a piston to the group
      * @param piston The piston
      */
-    void add_piston(pros::ADIDigitalOut piston);
+    void add_piston(pros::ADIDigitalOut& piston);
 
     /**
      * Gets the size of the piston group

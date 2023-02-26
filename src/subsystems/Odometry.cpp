@@ -38,8 +38,6 @@ Odometry::Odometry()
     velocityIndex = 0;
 
     lastTime = 0;
-
-    running = false;
 }
 
 Odometry::Odometry(const Odometry& copy)
@@ -78,8 +76,6 @@ Odometry::Odometry(const Odometry& copy)
     velocityIndex = copy.velocityIndex;
 
     lastTime = copy.lastTime;
-
-    running = false;
 }
 
 Odometry::~Odometry()
@@ -149,7 +145,7 @@ double Odometry::getInertial()
 void Odometry::updatePosition()
 {
     // Add a writer to the system
-    database.addWriter();
+    mutex.take();
 
     // Calculate sensor value changes
     double linearChange = getLinear() - lastLinear;
@@ -193,35 +189,42 @@ void Odometry::updatePosition()
     lastTime += timeChange;
 
     // Remove a writer from the system
-    database.removeWriter();
+    mutex.give();
 }
 
 void Odometry::setLinear(pros::Rotation& _linear, double _linearCountsPerInch)
 {
+    mutex.take();
     if (linear != nullptr)
         delete linear;
     linear = new pros::Rotation(_linear);
     linearCountsPerInch = _linearCountsPerInch;
+    mutex.give();
 }
 
 void Odometry::setStrafe(pros::Rotation& _strafe, double _strafeCountsPerInch)
 {
+    mutex.take();
     if (strafe != nullptr)
         delete strafe;
     strafe = new pros::Rotation(_strafe);
     strafeCountsPerInch = _strafeCountsPerInch;
+    mutex.give();
 }
 
 void Odometry::setInertial(pros::Imu& _inertial, double _inertialConstant)
 {
+    mutex.take();
     if (inertial != nullptr)
         delete inertial;
     inertial = new pros::Imu(_inertial);
     inertialConstant = _inertialConstant;
+    mutex.give();
 }
 
 void Odometry::initialize()
 {
+    mutex.take();
     if (linear != nullptr)
         linear->reset_position();
     if (strafe != nullptr)
@@ -233,35 +236,12 @@ void Odometry::initialize()
             pros::delay(50);
         inertial->tare();
     }
-}
-
-void Odometry::start()
-{
-    if (!running)
-    {
-        running = true;
-        pros::Task* odometryTask = new pros::Task(runOdometry, this, TASK_NAME);
-        TaskManager::getInstance()->addTask(odometryTask);
-    }
-}
-
-void Odometry::stop()
-{
-    if (running)
-    {
-        running = false;
-        TaskManager::getInstance()->removeTask(TASK_NAME);
-    }
-}
-
-bool Odometry::isRunning()
-{
-    return running;
+    mutex.give();
 }
 
 void Odometry::setPosition(double _x, double _y, double _theta)
 {
-    database.addWriter();
+    mutex.take();
 
     if (linear != nullptr)
         linear->reset_position();
@@ -287,12 +267,12 @@ void Odometry::setPosition(double _x, double _y, double _theta)
     lastInertial = 0.0;
     lastTime = pros::millis();
 
-    database.removeWriter();
+    mutex.give();
 }
 
 Position Odometry::getPosition()
 {
-    database.addReader();
+    mutex.take();
 
     double xVel = 0.0;
     double yVel = 0.0;
@@ -309,13 +289,15 @@ Position Odometry::getPosition()
 
     Position position(x, y, theta, xVel, yVel, thetaVel);
 
-    database.removeReader();
+    mutex.give();
 
     return position;
 }
 
 Odometry& Odometry::operator=(const Odometry& rhs)
 {
+    mutex.take();
+
     if (linear != nullptr)
         delete linear;
     if (strafe != nullptr)
@@ -358,7 +340,7 @@ Odometry& Odometry::operator=(const Odometry& rhs)
 
     lastTime = rhs.lastTime;
 
-    running = false;
+    mutex.give();
 
     return *this;
 }

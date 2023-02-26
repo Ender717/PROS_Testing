@@ -29,9 +29,9 @@ private:
     static constexpr int VELOCITY_BUFFER = 10;
 
     /**
-     * Database object to make the odometry system thread-safe
+     * Mutex to make the odometry system thread-safe
      */
-    Database database;
+    pros::Mutex mutex;
 
     /**
      * The linear tracking wheel configuration
@@ -73,11 +73,6 @@ private:
      * The system clock time from the last loop
      */
     int lastTime;
-
-    /**
-     * Whether the system is running or not
-     */
-    bool running;
 
     /**
      * Runs the system by updating it in a loop
@@ -151,22 +146,6 @@ public:
      * Initializes the system
      */
     void initialize();
-
-    /**
-     * Starts the system
-     */
-    void start();
-
-    /**
-     * Stops the system
-     */
-    void stop();
-
-    /**
-     * Checks if the system is running or not
-     * @return True if the system is running, false if not
-     */
-    bool isRunning();
 
     /**
      * Sets the position of the system

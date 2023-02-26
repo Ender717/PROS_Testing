@@ -13,7 +13,7 @@ PistonGroup::PistonGroup(const PistonGroup& copy)
         pistons.push_back(piston);
 }
 
-void PistonGroup::add_piston(pros::ADIDigitalOut piston)
+void PistonGroup::add_piston(pros::ADIDigitalOut& piston)
 {
     pistons.push_back(piston);
 }

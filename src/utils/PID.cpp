@@ -40,6 +40,11 @@ void PID::setFeedForward(double _ffSlope, double _ffOffset)
     ffOffset = _ffOffset;
 }
 
+void PID::setTarget(double _target)
+{
+    target = _target;
+}
+
 double PID::getValue(double current)
 {
     double error = target - current;

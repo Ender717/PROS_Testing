@@ -79,6 +79,12 @@ public:
     void setFeedForward(double _ffSlope, double _ffOffset);
 
     /**
+     * Sets the target of the controller
+     * @param _target The new target
+     */
+    void setTarget(double _target);
+
+    /**
      * Gets the control value
      * @param current The current system value
      * @return The calculated control value

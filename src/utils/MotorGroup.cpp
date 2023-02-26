@@ -43,7 +43,7 @@ double MotorGroup::bindVelocity(double velocity)
     return velocity;
 }
 
-void MotorGroup::add_motor(pros::Motor motor)
+void MotorGroup::add_motor(pros::Motor& motor)
 {
     motors.push_back(motor);
 }
